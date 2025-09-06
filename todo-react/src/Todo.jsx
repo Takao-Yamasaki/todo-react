@@ -31,7 +31,7 @@ export const Todo = () => {
           {completeTodos.map((todo) => (
             <li key={todo}>
               <div className="list-row">
-                <p className="todo-item">TODOでした</p>
+                <p className="todo-item">{todo}</p>
                 <button>戻す</button>
               </div>
             </li>
