@@ -25,6 +25,17 @@ export const Todo = () => {
     setIncompleteTodos(newTodos);
   };
 
+  // タスクの完了機能
+  const onClickComplite = (index) => {
+    // タスクの削除
+    const newIncompleteTodos = [...incompleteTodos];
+    newIncompleteTodos.splice(index, 1);
+    // タスクを完了のTODOに追加
+    const newCompleteTodos = [...completeTodos, incompleteTodos[index]]
+    setCompleteTodos(newCompleteTodos);
+    setIncompleteTodos(newIncompleteTodos);
+  };
+
   return (
     <>
       <div className="input-area">
@@ -38,7 +49,7 @@ export const Todo = () => {
               <li key={todo}>
                 <div className="list-row">
                   <p className="todo-item">{todo}</p>
-                  <button>完了</button>
+                  <button onClick={() => onClickComplite(index)}>完了</button>
                   <button onClick={() => onClickDelete(index)}>削除</button>
                 </div>
               </li>
