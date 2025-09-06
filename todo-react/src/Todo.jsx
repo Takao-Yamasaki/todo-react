@@ -3,8 +3,8 @@ import { useState } from 'react';
 
 export const Todo = () => {
   const [todoText, setTodotext] = useState("");
-  const [incompleteTodos, setIncompleteTodos] = useState(["TODOです1", "TODOです2"]);
-  const [completeTodos, setCompleteTodos] = useState(["TODOでした1", "TODOでした2"]);
+  const [incompleteTodos, setIncompleteTodos] = useState([]);
+  const [completeTodos, setCompleteTodos] = useState([]);
 
   const onChangeTodoText = (event) =>  setTodotext(event.target.value);
 
@@ -36,6 +36,17 @@ export const Todo = () => {
     setIncompleteTodos(newIncompleteTodos);
   };
 
+  // タスクの戻す機能
+  const onClickBack = (index) => {
+    // タスクの削除
+    const newCompleteTodos = [...completeTodos];
+    newCompleteTodos.splice(index, 1);
+    // タスクを未完了のTODOに追加
+    const newIncompleteTodos = [...incompleteTodos, completeTodos[index]];
+    setIncompleteTodos(newIncompleteTodos);
+    setCompleteTodos(newCompleteTodos);
+  };
+
   return (
     <>
       <div className="input-area">
@@ -59,11 +70,11 @@ export const Todo = () => {
       <div className="complete-area">
         <p className="title">完了のTODO</p>
         <ul>
-          {completeTodos.map((todo) => (
+          {completeTodos.map((todo, index) => (
             <li key={todo}>
               <div className="list-row">
                 <p className="todo-item">{todo}</p>
-                <button>戻す</button>
+                <button onClick={() => onClickBack(index)}>戻す</button>
               </div>
             </li>
           ))}
