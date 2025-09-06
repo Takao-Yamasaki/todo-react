@@ -8,6 +8,7 @@ export const Todo = () => {
 
   const onChangeTodoText = (event) =>  setTodotext(event.target.value);
 
+  // タスクの追加
   const onClickAdd = () => {
     // テキストボックスが空の時はreturnする
     if (todoText === "") return;
@@ -15,6 +16,13 @@ export const Todo = () => {
     setIncompleteTodos(newTodos);
     // テキストボックスを空にする
     setTodotext("");
+  };
+
+  // タスクの削除
+  const onClickDelete = (index) => {
+    const newTodos = [...incompleteTodos]
+    newTodos.splice(index, 1);
+    setIncompleteTodos(newTodos);
   };
 
   return (
@@ -26,12 +34,12 @@ export const Todo = () => {
       <div className="incomplete-area">
         <p className="title">未完了のTODO</p>
         <ul>
-          {incompleteTodos.map((todo) => (
+          {incompleteTodos.map((todo, index) => (
               <li key={todo}>
                 <div className="list-row">
                   <p className="todo-item">{todo}</p>
                   <button>完了</button>
-                  <button>削除</button>
+                  <button onClick={() => onClickDelete(index)}>削除</button>
                 </div>
               </li>
           ))}
