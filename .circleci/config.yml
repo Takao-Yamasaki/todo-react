@@ -1,13 +1,13 @@
-version 2.1
+version: 2.1
 
 orbs:
   path-filtering: circleci/path-filtering@1.0.0
 
-workflows;
+workflows:
   main:
     jobs:
       - path-filtering/filter:
-          base-reversion: main
+          base-revision: main
           config-path: .circleci/config.yml
           filters:
             ignore:
@@ -17,10 +17,10 @@ workflows;
             - path-filtering/filter
 
 jobs:
-  - hello-world:
-      docker:
-        - image: cming/base:stable
-      step:
-        - run:
+  hello-world:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run:
           name: Hello World
           command: echo "Hello World!"
