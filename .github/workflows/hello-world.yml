@@ -1,0 +1,13 @@
+name: Hello World
+
+on:
+  push:
+    paths-ignore:
+      - 'README.md'
+
+job:
+  hello-world:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hello World
+        run: echo "Hello World!"
