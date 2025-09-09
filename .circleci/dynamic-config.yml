@@ -4,6 +4,9 @@ parameters:
   readme-changed:
     type: boolean
     default: false
+  other-files-changed: # 新しいパラメータを追加
+    type: boolean
+    default: false
 
 jobs:
   hello-world:
@@ -16,3 +19,9 @@ jobs:
             - run:
                 name: Hello World
                 command: echo "Hello World!"
+
+workflows:
+  hello-workflow:
+    when: << pipeline.parameters.other-files-changed >> # README.md以外の変更があった場合に実行
+    jobs:
+      - hello-world:

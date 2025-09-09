@@ -8,6 +8,8 @@ workflows:
   setup:
     jobs:
       - path-filtering/filter:
+          name: path-filter-check
           mapping: |
-            README.md readme-changed true
+            README.md readme-changed
+            .* other-files-changed
           config-path: .circleci/dynamic-config.yml
