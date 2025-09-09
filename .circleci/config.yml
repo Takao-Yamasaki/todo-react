@@ -26,8 +26,9 @@ jobs:
       - image: cimg/base:stable
     steps:
       - unless: 
-          condition: << pipeline.parameters.readme-changed >>
-          run:
+        condition: << pipeline.parameters.readme-changed >>
+        steps:
+          - run:
             name: Hello World
             command: echo "Hello World!" 
       
