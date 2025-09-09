@@ -20,4 +20,4 @@ jobs:
 workflows:
   hello-workflow:
     jobs:
-      - hello-world:
+      - hello-world
