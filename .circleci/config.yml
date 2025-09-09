@@ -29,8 +29,8 @@ jobs:
         condition: << pipeline.parameters.readme-changed >>
         steps:
           - run:
-            name: Hello World
-            command: echo "Hello World!" 
+              name: Hello World
+              command: echo "Hello World!" 
       
       # - run:
       #     name: Hello World
