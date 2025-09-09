@@ -16,8 +16,3 @@ jobs:
             - run:
                 name: Hello World
                 command: echo "Hello World!"
-
-workflows:
-  hello-workflow:
-    jobs:
-      - hello-world:
