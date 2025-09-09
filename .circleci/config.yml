@@ -25,7 +25,13 @@ jobs:
     docker:
       - image: cimg/base:stable
     steps:
-      - run:
-          name: Hello World
-          command: echo "Hello World!"
-          unless: << pipeline.parameters.readme-changed >> # README.md以外のファイルが更新されたら実行
+      - unless: 
+          condition: << pipeline.parameters.readme-changed >>
+          run:
+            name: Hello World
+            command: echo "Hello World!" 
+      
+      # - run:
+      #     name: Hello World
+      #     command: echo "Hello World!"
+      #     unless: << pipeline.parameters.readme-changed >> # README.md以外のファイルが更新されたら実行
