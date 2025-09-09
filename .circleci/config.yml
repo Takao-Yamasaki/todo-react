@@ -1,26 +1,33 @@
 version: 2.1
+setup: true
 
 orbs:
-  path-filtering: circleci/path-filtering@1.0.0
+  path-filtering: circleci/path-filtering@2.0.0
 
 workflows:
   main:
     jobs:
       - path-filtering/filter:
-          base-revision: main
+          mapping: |
+            README.md readme-changed true
           config-path: .circleci/config.yml
-          filters:
-            ignore:
-              - README.md
       - hello-world:
           requires:
             - path-filtering/filter
+
+parameters:
+  readme-changed:
+    type: boolean
+    default: false
 
 jobs:
   hello-world:
     docker:
       - image: cimg/base:stable
     steps:
-      - run:
-          name: Hello World
-          command: echo "Hello World!"
+      - unless: # README.md以外のファイルが更新されたら実行
+        condition: << pipeline.parameters.readme-changed >
+        steps:
+          - run:
+              name: Hello World
+              command: echo "Hello World!"
